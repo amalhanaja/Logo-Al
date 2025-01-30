@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { FormLogoContext, FormLogoState } from "./context/form-logo-context";
 import { FormLogoName } from "./form-logo-name";
 import { FormLogoDescription } from "./form-logo-description";
+import { FormLogoColors } from "./form-logo-colors";
 
 const FormStateComponent = () => {
   const formLogoContext = useContext(FormLogoContext);
@@ -12,6 +13,8 @@ const FormStateComponent = () => {
       return <FormLogoName />;
     case "description":
       return <FormLogoDescription />;
+    case "colors":
+      return <FormLogoColors />;
     default:
       return <div>Default</div>;
   }
@@ -23,6 +26,7 @@ export const FormLogoMain = () => {
     values: {
       name: "",
       description: "",
+      colors: [],
     },
     setState: () => {},
   });
