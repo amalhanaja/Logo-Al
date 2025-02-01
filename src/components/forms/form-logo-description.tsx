@@ -36,7 +36,7 @@ export const FormLogoDescription = () => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: "",
+      description: formLogoCtx.values.description,
     },
   });
 

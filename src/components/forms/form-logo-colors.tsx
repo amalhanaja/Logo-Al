@@ -108,6 +108,7 @@ const ColorItemComp = ({
 }) => {
   return (
     <button
+      type="button"
       className={cn(
         color.itemStyle,
         isSelected ? "border-primary" : "border-background",
@@ -158,7 +159,7 @@ export const FormLogoColors = () => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      colors: [],
+      colors: formLogoCtx.values.colors,
     },
   });
 

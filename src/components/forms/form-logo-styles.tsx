@@ -69,7 +69,12 @@ const ItemComp = ({
         isSelected ? "border-primary" : "border-background"
       )}
     >
-      <Image src={item.imgSrc} alt={item.name} objectFit="cover" className="w-42 h-42" />
+      <Image
+        src={item.imgSrc}
+        alt={item.name}
+        objectFit="cover"
+        className="w-42 h-42"
+      />
       <div className="text-xl font-semibold text-center pb-4">{item.name}</div>
     </div>
   );
@@ -101,7 +106,7 @@ export const FormLogoStyles = () => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      style: "",
+      style: formLogoCtx.values.style,
     },
   });
 

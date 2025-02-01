@@ -38,7 +38,9 @@ export const FormLogoName = () => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: params.get("name") ?? "",
+      name: formLogoCtx.values.name
+        ? formLogoCtx.values.name
+        : params.get("name") ?? "",
     },
   });
 
