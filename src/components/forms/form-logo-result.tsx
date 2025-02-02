@@ -1,10 +1,11 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Card, CardContent } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { Download, FileX2, LayoutDashboard, RotateCcw } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { FormLogoContext } from "./context/form-logo-context";
+import Link from "next/link";
 
 type State = {
   isLoading: boolean;
@@ -55,9 +56,11 @@ export const SuccessState = ({ imgSrc }: { imgSrc: string }) => {
             Download
           </a>
         </Button>
-        <Button className="font-semibold" variant="outline" size="lg">
-          <LayoutDashboard />
-          Dashboard
+        <Button className="font-semibold" variant="outline" size="lg" asChild>
+          <Link href="/dashboard">
+            <LayoutDashboard />
+            Dashboard
+          </Link>
         </Button>
       </div>
     </div>
@@ -65,16 +68,46 @@ export const SuccessState = ({ imgSrc }: { imgSrc: string }) => {
 };
 
 export const FormLogoResult = () => {
+  const { values } = useContext(FormLogoContext);
   const [state, setState] = useState<State>({
     isLoading: true,
     isError: false,
     imgSrc: null,
   });
+  const generateLogo = useCallback(async () => {
+    setState({
+      isLoading: true,
+      isError: false,
+      imgSrc: null,
+    });
+    const response = await fetch("/api/generate-logo", {
+      method: "POST",
+      body: JSON.stringify(values),
+    });
+    if (!response.ok) {
+      setState({
+        isLoading: false,
+        isError: true,
+        imgSrc: null,
+      });
+      return;
+    }
+    const { data }: { data: string } = await response.json();
+    setState({
+      isLoading: false,
+      isError: false,
+      imgSrc: data,
+    });
+  }, [values]);
+  useEffect(() => {
+    generateLogo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Card>
       <CardContent>
         {state.isLoading && <LoadingState />}
-        {state.isError && <ErrorState onRetry={() => {}} />}
+        {state.isError && <ErrorState onRetry={generateLogo} />}
         {state.imgSrc && <SuccessState imgSrc={state.imgSrc} />}
       </CardContent>
     </Card>

@@ -1,13 +1,7 @@
 "use client";
 
+import { FormLogoValues } from "@/global.types";
 import { createContext } from "react";
-
-export type FormLogoValues = {
-  name: string;
-  description: string;
-  colors: string[];
-  style: string;
-};
 
 export type FormLogoStateName =
   | "name"
