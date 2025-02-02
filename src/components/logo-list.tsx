@@ -6,6 +6,7 @@ import { Download, ImagePlus } from "lucide-react";
 import Image from "next/image";
 import { FormLandingPage } from "./forms/form-landing-page";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const LogoItem = ({ logo }: { logo: UsersImagesSelect }) => {
   return (
@@ -23,7 +24,7 @@ const LogoItem = ({ logo }: { logo: UsersImagesSelect }) => {
         </a>
       </Button>
       <h3 className="font-semibold text-lg mt-4">{logo.name}</h3>
-      <p>{logo.description}</p>
+      <p className="text-center line-clamp-2 ">{logo.description}</p>
     </div>
   );
 };
@@ -34,7 +35,7 @@ const EmptyState = () => {
       <h2 className="font-bold text-3xl">
         You don&apos;t have any generated logo
       </h2>
-      <ImagePlus className="size-40" />
+      <ImagePlus className="size-24 sm:size-28 lg:size-40" />
       <div className="space-y-2">
         <label>Generate a new logo</label>
         <FormLandingPage />
@@ -49,8 +50,13 @@ export const LogoList = async () => {
     <>
       {logos.length !== 0 && (
         <>
-          <h2 className="font-bold text-3xl">Your Recent Logo</h2>
-          <div className="grid grid-cols-4 gap-4 mt-8">
+          <div className="flex flex-row justify-between w-full self-start">
+            <h2 className="font-bold text-3xl">Recent Logo</h2>
+            <Button>
+              <Link href="/create">Generate new Logo</Link>
+            </Button>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 mt-16">
             {logos.map((logo) => (
               <LogoItem logo={logo} key={logo.id} />
             ))}

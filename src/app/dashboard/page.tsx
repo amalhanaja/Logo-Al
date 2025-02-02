@@ -4,8 +4,8 @@ import { Suspense } from "react";
 
 export default function DashboardPage() {
   return (
-    <main className="w-full max-w-7xl mx-auto px-4 py-8">
-      <Suspense fallback={<Loader2 className="animate-spin" />}>
+    <main className="w-full max-w-7xl mx-auto px-4 py-8 flex flex-col place-items-center">
+      <Suspense fallback={<Loader2 className="animate-spin size-40 mt-24" />}>
         <LogoList />
       </Suspense>
     </main>

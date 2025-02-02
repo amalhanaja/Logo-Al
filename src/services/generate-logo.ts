@@ -39,10 +39,10 @@ const generateLogoWithTogether = async (prompt: string) => {
       body: JSON.stringify(payload),
     }
   );
+  const jsonResponse: { data: { b64_json: string }[] } = await response.json();
   if (!response.ok) {
     throw new Error("failed generate with together");
   }
-  const jsonResponse: { data: { b64_json: string }[] } = await response.json();
   return convertToBase64Image(jsonResponse.data[0].b64_json);
 };
 
