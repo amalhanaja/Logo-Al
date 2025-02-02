@@ -73,6 +73,7 @@ const generateLogoWithHF = async (prompt: string) => {
   const base64Data = Buffer.from(arrayBuffer).toString("base64");
   return convertToBase64Image(base64Data);
 };
+
 export const generateLogo = async (values: FormLogoValues): Promise<string> => {
   const prompt = generatePrompt(values);
   try {
