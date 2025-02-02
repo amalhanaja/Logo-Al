@@ -112,7 +112,7 @@ export const FormLogoStyles = () => {
 
   function onSubmit(values: FormSchemaType) {
     formLogoCtx.setState({
-      name: "colors",
+      name: "generating",
       values: { ...formLogoCtx.values, style: values.style },
     });
   }

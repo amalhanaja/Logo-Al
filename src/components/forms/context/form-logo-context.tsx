@@ -9,7 +9,12 @@ export type FormLogoValues = {
   style: string;
 };
 
-export type FormLogoStateName = "name" | "description" | "colors" | "style";
+export type FormLogoStateName =
+  | "name"
+  | "description"
+  | "colors"
+  | "style"
+  | "generating";
 
 export type FormLogoState = {
   name: FormLogoStateName;
