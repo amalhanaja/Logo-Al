@@ -3,6 +3,8 @@ import { FormLogoValues } from "@/global.types";
 import { auth } from "@clerk/nextjs/server";
 import { storeLogo } from "@/services/store-logo";
 
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   const payload: FormLogoValues = await request.json();
   const { userId } = await auth();
