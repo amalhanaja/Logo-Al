@@ -27,23 +27,27 @@ const generateLogoWithTogether = async (prompt: string) => {
     steps: 4,
     n: 1,
     response_format: "b64_json",
-  };
+  }
   const response = await fetch(
     "https://api.together.xyz/v1/images/generations",
     {
       method: "POST",
       headers: {
         Authorization: `Bearer ${serverConfig.togetherApiKey}`,
-        "Content-Type": "applications/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     }
   );
-  const jsonResponse: { data: { b64_json: string }[] } = await response.json();
-  if (!response.ok) {
-    throw new Error("failed generate with together");
+  const jsonResponse: {
+    data?: { b64_json: string }[];
+    error?: { message: string };
+  } = await response.json();
+  if (jsonResponse.data) {
+    return convertToBase64Image(jsonResponse.data[0].b64_json);
   }
-  return convertToBase64Image(jsonResponse.data[0].b64_json);
+  console.error("Together error", jsonResponse.error);
+  throw new Error("failed generate with together");
 };
 
 const generateLogoWithHF = async (prompt: string) => {
