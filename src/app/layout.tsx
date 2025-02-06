@@ -11,6 +11,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  applicationName: "Logo Al",
   title: "Logo Al",
   description:
     "Logo AI is an innovative AI-powered logo design tool that helps you create stunning logos in seconds. Simply enter your brand name and preferred style, and our AI will generate a wide range of unique and professional logo options.",
@@ -27,6 +28,9 @@ export const metadata: Metadata = {
     "create logo",
     "design logo",
   ],
+  other: {
+    "dicoding:email": "amalhanaja@gmail.com",
+  },
 };
 
 export default function RootLayout({
